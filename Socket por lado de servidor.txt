@@ -1,0 +1,39 @@
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+/**
+ *
+ * @author cncarroyo
+ */
+public class Socket_Servidor {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException {
+       
+          ServerSocket server = new ServerSocket(8000); //Numero de puerto habilitado
+          System.out.println("Espera....");
+          while(true){
+              
+             Socket cliente = server.accept();
+             BufferedReader entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+             PrintWriter salida = new PrintWriter(new OutputStreamWriter(cliente.getOutputStream()));
+             String dato= entrada.readLine().toString();
+             System.out.println(dato);
+             salida.println(dato.toString());
+             cliente.close();
+          
+          }
+        
+        
+    }
+    
+}
